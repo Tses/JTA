@@ -32,8 +32,16 @@ public class HelloService {
 	SimpleTransaction t;
 	
     public String createHelloMessage(String name) {
-    	t.doDB();
-        return "Hello1 " + name + "!";
+    	if (name != null){
+	    	if (name.startsWith("X"))	    	
+	    		t.doXA(name);
+	    	else
+	    		t.doNonXA(name);
+	    	
+	        return "Hello1 " + name + "!";
+    	} else {
+    		return "Nothing no T argument !";
+    	}
     }
 
 }
